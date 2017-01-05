@@ -1,0 +1,12 @@
+{
+    "name": "jugger-php/jugger-html",
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "jugger\\html\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.0.9"
+    }
+}
