@@ -85,8 +85,7 @@ abstract class BaseHtml
                 $ret .= " {$attr}";
             }
             elseif ($attr == "style") {
-                $value = self::renderAttributesStyle($value);
-                $ret .= " style='{$value}'";
+                $ret .= self::renderAttributesStyle($value);
             }
             elseif (in_array($attr, ['data','aria'])) {
                 $ret .= self::renderAttributesGroup($attr, $value);
@@ -103,7 +102,7 @@ abstract class BaseHtml
     public static function renderAttributesStyle($options)
     {
         if (is_string($options)) {
-            return $options;
+            return " style='{$options}'";
         }
 
         $ret = "";
@@ -111,7 +110,7 @@ abstract class BaseHtml
             $value = self::encode($value);
             $ret .= "{$name}: {$value};";
         }
-        return $ret;
+        return " style='{$ret}'";
     }
 
     public static function renderAttributesGroup($group, array $options)
