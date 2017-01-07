@@ -80,13 +80,32 @@ abstract class Html extends BaseHtml
         return self::list('ol', $values, $options);
     }
 
-    public static function select(array $values, array $options = [])
+    public static function select(string $name, array $values, string $selectedValue = null, array $options = [])
     {
         $content = "";
-        foreach ($values as $item) {
-            $content .= self::option($item);
+        $keys = array_keys($values);
+        $isAssoc = array_keys($keys) !== $keys;
+        foreach ($values as $key => $value) {
+            if ($isAssoc) {
+                $selected = $key == $selectedValue;
+                $content .= self::option($value, $key, $selected);
+            }
+            else {
+                $selected = $value == $selectedValue;
+                $content .= self::option($value, "", $selected);
+            }
         }
+        $options = array_merge(['name' => $name], $options);
         return self::beginTag('select', $options) . $content . self::endTag('select');
+    }
+
+    public static function option(string $label, string $value = null, bool $selected = false)
+    {
+        $options = [
+            'selected' => $selected,
+            'value' => empty($value) ? null : $value,
+        ];
+        return self::contentTag("option", $label, $options);
     }
 
     public static function textarea($name, $value = '', array $options = [])
