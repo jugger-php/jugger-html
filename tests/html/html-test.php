@@ -251,8 +251,20 @@ class HtmlTest extends TestCase
             ],
             // select
             [
-                "<select><option>1</option><option>2</option><option>3</option></select>",
-                Html::select([1,2,3])
+                "<select name='test'><option>1</option><option>2</option><option>3</option></select>",
+                Html::select('test', [1,2,3])
+            ],
+            [
+                "<select name='test'><option value='1'>value1</option><option value='2'>value2</option><option value='3'>value3</option></select>",
+                Html::select('test', ['1' => 'value1', '2' => 'value2', '3' => 'value3'])
+            ],
+            [
+                "<select name='test'><option>1</option><option selected>2</option><option>3</option></select>",
+                Html::select('test', [1,2,3], 2)
+            ],
+            [
+                "<select class='form-control' name='test'><option>1</option><option selected>2</option><option>3</option></select>",
+                Html::select('test', [1,2,3], 2, ['class' => 'form-control'])
             ],
             // textarea
             [
