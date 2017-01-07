@@ -53,7 +53,7 @@ abstract class BaseHtml
 
     public static function contentTag($name, $content, array $options = [])
     {
-        return self::beginTag($name, $options) . self::encode($content) . self::endTag($name);
+        return self::beginTag($name, $options) . $content . self::endTag($name);
     }
 
     /*
