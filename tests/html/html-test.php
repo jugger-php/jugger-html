@@ -195,8 +195,16 @@ class HtmlTest extends TestCase
                 Html::checkbox('_')
             ],
             [
+                "<label><input type='checkbox' name='_'> check-box-label</label>",
+                Html::checkbox('_', 'check-box-label')
+            ],
+            [
                 "<input type='radio' name='_'>",
                 Html::radio('_')
+            ],
+            [
+                "<label><input type='radio' name='_'> radio-box-label</label>",
+                Html::radio('_', 'radio-box-label')
             ],
             [
                 "<input type='file' name='_'>",
@@ -221,6 +229,15 @@ class HtmlTest extends TestCase
             [
                 "<input type='submit' value='Кнопка'>",
                 Html::submit('Кнопка')
+            ],
+            // checkbox & radio list
+            [
+                "<div><label><input type='checkbox' name='checkbox-test' value='value-1'> label-1</label><label><input type='checkbox' name='checkbox-test' value='value-2'> label-2</label></div>",
+                Html::checkboxList('checkbox-test', ['value-1' => 'label-1', 'value-2' => 'label-2'])
+            ],
+            [
+                "<div class='form-group'><label><input type='radio' name='radio-test' value='value-1'> label-1</label><label><input type='radio' name='radio-test' value='value-2'> label-2</label></div>",
+                Html::radioList('radio-test', ['value-1' => 'label-1', 'value-2' => 'label-2'], ['class' => 'form-group'])
             ],
             // label
             [
