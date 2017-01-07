@@ -34,14 +34,44 @@ trait HtmlInputTrait
         return self::input($name, 'url', $options);
     }
 
-    public static function checkbox($name, array $options = [])
+    public static function checkbox($name, string $label = null, array $options = [])
     {
-        return self::input($name, 'checkbox', $options);
+        if ($label) {
+            $label = self::encode($label);
+            return "<label>". self::input($name, 'checkbox', $options) ." {$label}</label>";
+        }
+        else {
+            return self::input($name, 'checkbox', $options);
+        }
     }
 
-    public static function radio($name, array $options = [])
+    public static function checkboxList(string $name, array $values, array $options = [])
     {
-        return self::input($name, 'radio', $options);
+        $ret = "";
+        foreach ($values as $value => $label) {
+            $ret .= self::checkbox($name, $label, compact('value'));
+        }
+        return self::div($ret, $options);
+    }
+
+    public static function radio($name, string $label = null, array $options = [])
+    {
+        if ($label) {
+            $label = self::encode($label);
+            return "<label>". self::input($name, 'radio', $options) ." {$label}</label>";
+        }
+        else {
+            return self::input($name, 'radio', $options);
+        }
+    }
+
+    public static function radioList(string $name, array $values, array $options = [])
+    {
+        $ret = "";
+        foreach ($values as $value => $label) {
+            $ret .= self::radio($name, $label, compact('value'));
+        }
+        return self::div($ret, $options);
     }
 
     public static function file($name, array $options = [])
