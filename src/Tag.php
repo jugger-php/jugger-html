@@ -7,8 +7,6 @@ use jugger\ui\Widget;
 
 class Tag extends Widget
 {
-    use TagAccessTrait;
-
     protected $name;
     protected $attributes = [];
 
@@ -16,6 +14,16 @@ class Tag extends Widget
     {
         $this->name = $name;
         $this->setAttributes($attributes);
+    }
+
+    public function __set(string $name, $value)
+    {
+        $this->setAttribute($name, $value);
+    }
+
+    public function __get(string $name)
+    {
+        return $this->getAttribute($name);
     }
 
     public function setAttributes(array $attributes)
