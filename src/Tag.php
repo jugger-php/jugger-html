@@ -58,7 +58,7 @@ class Tag extends Widget
         $attrs = " ";
         $groupAttrs = $this->getGroupAttributesNames();
         foreach ($this->attributes as $name => $value) {
-            if (is_bool($value)) {
+            if (is_bool($value) && $value) {
                 $attrs .= "{$name}";
             }
             elseif ($value == "" || (is_array($value) && empty($value))) {
@@ -104,9 +104,14 @@ class Tag extends Widget
             if (is_bool($value)) {
                 $value = $value ? 'true' : 'false';
             }
-            else {
-                $value = Html::encode($value);
+            elseif (is_array($value)) {
+                $value = json_encode($value);
             }
+            else {
+                // pass
+            }
+
+            $value = Html::encode($value);
             $ret .= "{$prefix}-{$name}='{$value}' ";
         }
         if (!empty($ret)) {
