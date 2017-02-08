@@ -11,6 +11,6 @@ abstract class Html
 
     public static function decode($value)
     {
-        return htmlspecialchars_decode($content, ENT_QUOTES);
+        return htmlspecialchars_decode($value, ENT_QUOTES);
     }
 }
