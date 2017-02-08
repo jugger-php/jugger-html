@@ -11,18 +11,65 @@ class TagTest extends TestCase
     {
         $tag = new Tag('input');
         $tag->type = 'text';
-        $tag->style = [
-            'color' => 'red',
-        ];
-        $tag->data = [
-            'id' => 123,
-        ];
-        $tag->aria = [
-            'hidden' => true,
-        ];
         $this->assertEquals(
             $tag->render(),
-            "<input type='text' style='color:red;' data-id='123' aria-hidden='true'>"
+            "<input type='text'>"
+        );
+
+        $tag = new Tag('input', [
+            'type' => 'text',
+        ]);
+        $this->assertEquals(
+            $tag->render(),
+            "<input type='text'>"
+        );
+    }
+
+    public function testAttributes()
+    {
+        $tag = new Tag('input', [
+            'type' => 'text'
+        ]);
+        $this->assertEquals(
+            $tag->render(),
+            "<input type='text'>"
+        );
+
+        $tag = new Tag('input', [
+            'checked' => true,
+            'selected' => false,
+        ]);
+        $this->assertEquals(
+            $tag->render(),
+            "<input checked>"
+        );
+
+        $tag = new Tag('input', [
+            'data' => [
+                'id' => 123,
+                'prop' => [
+                    'i' => 456,
+                ],
+                'prop-j' => 789,
+            ],
+            'aria' => [
+                'hidden' => true,
+            ],
+        ]);
+        $this->assertEquals(
+            $tag->render(),
+            "<input data-id='123' data-prop='{&quot;i&quot;:456}' data-prop-j='789' aria-hidden='true'>"
+        );
+
+        $tag = new Tag('input', [
+            'style' => [
+                'color' => 'red',
+                'background' => 'url("img.png") no-repeat',
+            ]
+        ]);
+        $this->assertEquals(
+            $tag->render(),
+            "<input style='color:red;background:url(&quot;img.png&quot;) no-repeat;'>"
         );
     }
 
@@ -31,6 +78,12 @@ class TagTest extends TestCase
         $tag = new Tag('input');
         $this->assertEquals(
             $tag->render(),
+            "<input>"
+        );
+
+        $tag = new Tag('input');
+        $this->assertEquals(
+            (string) $tag,
             "<input>"
         );
 
@@ -104,40 +157,18 @@ class TagTest extends TestCase
         );
     }
 
-    public function testAttributes()
+    public function testEmptyTag()
     {
-        $tag = new Tag('input', ['type' => 'text']);
+        $tag = new EmptyTag('content');
         $this->assertEquals(
             $tag->render(),
-            "<input type='text'>"
+            "content"
         );
 
-        $tag = new Tag('input', [
-            'data' => [
-                'id' => 123,
-                'name' => 'test',
-                'hidden' => true,
-            ]
-        ]);
+        $tag = new EmptyTag('c<o>n<t>e<n>t');
         $this->assertEquals(
             $tag->render(),
-            "<input data-id='123' data-name='test' data-hidden='true'>"
-        );
-
-        $this->assertEquals(
-            $tag->render(),
-            "<input data-id='123' data-name='test' data-hidden='true'>"
-        );
-
-        $tag = new Tag('input', [
-            'style' => [
-                'color' => 'red',
-                'background' => 'url("img.png") no-repeat',
-            ]
-        ]);
-        $this->assertEquals(
-            $tag->render(),
-            "<input style='color:red;background:url(&quot;img.png&quot;) no-repeat;'>"
+            "c<o>n<t>e<n>t"
         );
     }
 }
