@@ -8,7 +8,6 @@ class Li extends ContentTag
 {
     public function __construct(string $content = '', array $attributes = [])
     {
-        $tag = 'li';
-        parent::__construct($tag, $content, $attributes);
+        parent::__construct('li', $content, $attributes);
     }
 }
