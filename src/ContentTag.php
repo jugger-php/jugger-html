@@ -12,10 +12,10 @@ class ContentTag extends Tag
         $this->childs[] = $child;
     }
 
-    public function __construct(string $tag, string $content = '', array $attributes = [])
+    public function __construct(string $tag, string $content = '', array $options = [])
     {
         $this->content = $content;
-        parent::__construct($tag, $attributes);
+        parent::__construct($tag, $options);
     }
 
     public function run()

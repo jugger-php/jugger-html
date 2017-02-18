@@ -6,8 +6,8 @@ use jugger\html\ContentTag;
 
 class Li extends ContentTag
 {
-    public function __construct(string $content = '', array $attributes = [])
+    public function __construct(string $content = '', array $options = [])
     {
-        parent::__construct('li', $content, $attributes);
+        parent::__construct('li', $content, $options);
     }
 }

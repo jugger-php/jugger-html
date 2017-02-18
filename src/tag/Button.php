@@ -6,9 +6,9 @@ use jugger\html\ContentTag;
 
 class Button extends ContentTag
 {
-    public function __construct(string $content = '', array $attributes = [])
+    public function __construct(string $content = '', array $options = [])
     {
         $tag = 'button';
-        parent::__construct($tag, $content, $attributes);
+        parent::__construct($tag, $content, $options);
     }
 }

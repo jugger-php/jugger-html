@@ -6,10 +6,9 @@ use jugger\html\ContentTag;
 
 class Link extends ContentTag
 {
-    public function __construct(string $content = '', string $href = '#', array $attributes = [])
+    public function __construct(string $content = '', string $href = '#', array $options = [])
     {
-        $tag = 'a';
-        $attributes['href'] = $href;
-        parent::__construct($tag, $content, $attributes);
+        $options['href'] = $href;
+        parent::__construct('a', $content, $options);
     }
 }

@@ -8,12 +8,12 @@ use jugger\ui\Widget;
 class Tag extends Widget
 {
     protected $name;
-    protected $attributes = [];
+    protected $options = [];
 
-    public function __construct(string $name, array $attributes = [])
+    public function __construct(string $name, array $options = [])
     {
         $this->name = $name;
-        $this->setAttributes($attributes);
+        $this->setAttributes($options);
     }
 
     public function __set(string $name, $value)
@@ -26,21 +26,21 @@ class Tag extends Widget
         return $this->getAttribute($name);
     }
 
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $options)
     {
-        foreach ($attributes as $name => $value) {
+        foreach ($options as $name => $value) {
             $this->setAttribute($name, $value);
         }
     }
 
     public function setAttribute(string $name, $value)
     {
-        $this->attributes[$name] = $value;
+        $this->options[$name] = $value;
     }
 
     public function getAttribute($name)
     {
-        return $this->attributes[$name] ?? null;
+        return $this->options[$name] ?? null;
     }
 
     public function getGroupAttributesNames()
@@ -57,7 +57,7 @@ class Tag extends Widget
     {
         $attrs = " ";
         $groupAttrs = $this->getGroupAttributesNames();
-        foreach ($this->attributes as $name => $value) {
+        foreach ($this->options as $name => $value) {
             if (is_bool($value) && $value) {
                 $attrs .= "{$name}";
             }

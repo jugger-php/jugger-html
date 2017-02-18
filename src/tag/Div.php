@@ -6,8 +6,8 @@ use jugger\html\ContentTag;
 
 class Div extends ContentTag
 {
-    public function __construct(string $content = '', array $attributes = [])
+    public function __construct(string $content = '', array $options = [])
     {
-        parent::__construct('div', $content, $attributes);
+        parent::__construct('div', $content, $options);
     }
 }

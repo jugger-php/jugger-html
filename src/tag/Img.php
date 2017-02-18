@@ -6,9 +6,9 @@ use jugger\html\Tag;
 
 class Img extends Tag
 {
-    public function __construct(string $src, array $attributes = [])
+    public function __construct(string $src, array $options = [])
     {
-        $attributes['src'] = $src;
-        parent::__construct('img', $attributes);
+        $options['src'] = $src;
+        parent::__construct('img', $options);
     }
 }

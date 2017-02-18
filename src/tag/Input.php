@@ -6,10 +6,9 @@ use jugger\html\Tag;
 
 class Input extends Tag
 {
-    public function __construct(string $type, array $attributes = [])
+    public function __construct(string $type, array $options = [])
     {
-        $tag = 'input';
-        $attributes['type'] = $type;
-        parent::__construct($tag, $attributes);
+        $options['type'] = $type;
+        parent::__construct('input', $options);
     }
 }

@@ -6,9 +6,9 @@ use jugger\html\ContentTag;
 
 class P extends ContentTag
 {
-    public function __construct(string $content = '', array $attributes = [])
+    public function __construct(string $content = '', array $options = [])
     {
         $tag = 'p';
-        parent::__construct($tag, $content, $attributes);
+        parent::__construct($tag, $content, $options);
     }
 }
