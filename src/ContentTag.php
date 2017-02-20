@@ -29,9 +29,14 @@ class ContentTag extends Tag
     public function renderChilds()
     {
         $ret = "";
-        foreach ($this->childs as $tag) {
+        foreach ($this->getChilds() as $tag) {
             $ret .= $tag->render();
         }
         return $ret;
+    }
+
+    public function getChilds()
+    {
+        return $this->childs;
     }
 }
